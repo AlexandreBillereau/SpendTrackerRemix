@@ -1,5 +1,11 @@
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
 import Chart from "~/components/expenses/Chart";
+// import expensesStyle from "~/styles/expenses.css";
+// import type { LinksFunction } from "@remix-run/node";
+
+// export const links: LinksFunction = () => [
+//   { rel: "stylesheet", href: expensesStyle },
+// ];
 
 const DUMMY_EXPENSES = [
   {
