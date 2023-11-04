@@ -19,8 +19,10 @@ const DUMMY_EXPENSES = [
 export default function ExpensesAnalysisPage() {
   return (
     <>
-      <Chart expenses={DUMMY_EXPENSES}></Chart>
-      <ExpenseStatistics expenses={DUMMY_EXPENSES}></ExpenseStatistics>
+      <main>
+        <Chart expenses={DUMMY_EXPENSES}></Chart>
+        <ExpenseStatistics expenses={DUMMY_EXPENSES}></ExpenseStatistics>
+      </main>
     </>
   );
 }
