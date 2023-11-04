@@ -32,7 +32,7 @@
 }
 
 html {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 body {
@@ -276,4 +276,3 @@ button {
     transform: translateY(0);
   }
 }
-

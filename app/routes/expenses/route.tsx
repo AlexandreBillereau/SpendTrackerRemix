@@ -1,5 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
-import expensesStyle from "~/styles/auth.css";
+import expensesStyle from "~/styles/expenses.css";
+
+import { Outlet } from "@remix-run/react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: expensesStyle },
@@ -8,7 +10,9 @@ export const links: LinksFunction = () => [
 export default function Expenses() {
   return (
     <>
-      <h1>expenses</h1>
+      <main>
+        <Outlet></Outlet>
+      </main>
     </>
   );
 }
