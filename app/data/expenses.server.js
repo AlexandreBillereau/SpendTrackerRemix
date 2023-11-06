@@ -19,3 +19,19 @@ export async function addExpense(expense) {
     throw error;
   }
 }
+
+/**
+ * @return {Promise<[import("@prisma/client").Expense]>}
+ * return an array of expenses.
+ */
+export async function getExpenses() {
+  try {
+    const expenses = await prisma.expense.findMany({
+      orderBy: { date: "desc" },
+    });
+    return expenses;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
