@@ -1,5 +1,13 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/data/expenses.server.js",
+    "app/routes/_app.expenses.add/route.jsx",
+    "app/routes/_app.expenses.add/route.jsx",
+    "app/routes/_app.expenses.add/route.jsx"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,
