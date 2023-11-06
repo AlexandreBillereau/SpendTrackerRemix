@@ -35,3 +35,18 @@ export async function getExpenses() {
     throw error;
   }
 }
+
+/**
+ *
+ * @param {string} id
+ * @return {import("@prisma/client").Expense}
+ */
+export async function getExpensesById(id) {
+  try {
+    const expense = prisma.expense.findFirst({ where: { id } });
+    return expense;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

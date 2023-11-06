@@ -1,8 +1,8 @@
 import { redirect } from "@remix-run/node";
-import { useActionData, useNavigate } from "@remix-run/react";
+import { useActionData, useLoaderData, useNavigate } from "@remix-run/react";
 import ExpensesForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
-import { addExpense } from "~/data/expenses.server";
+import { addExpense, getExpenses } from "~/data/expenses.server";
 import { validateExpenseInput } from "~/data/validation.server";
 
 export default function AddExpensesPage() {
