@@ -48,6 +48,6 @@ export async function action({ params, request }) {
     return redirect("..");
   } else if (request.method === "DELETE") {
     await deleteExpense(expenseId);
-    return redirect("..");
+    return { id: expenseId };
   }
 }
