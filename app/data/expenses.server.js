@@ -50,3 +50,26 @@ export async function getExpensesById(id) {
     throw error;
   }
 }
+
+/**
+ *
+ * @param {string} id
+ * @param {import("@prisma/client").Expense} expenseDate
+ */
+export async function updateExpense(id, expenseDate) {
+  try {
+    prisma.expense.update({
+      where: {
+        id,
+      },
+      data: {
+        title: expenseDate.title,
+        amount: +expenseDate.amount,
+        date: new Date(expenseDate.date),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
