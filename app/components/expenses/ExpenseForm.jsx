@@ -1,8 +1,23 @@
-import { Link, useActionData, useLoaderData } from "@remix-run/react";
+import {
+  Link,
+  useActionData,
+  useLoaderData,
+  useMatches,
+  useParams,
+} from "@remix-run/react";
 
 function ExpenseForm() {
   const validationErrors = useActionData();
-  const expenseData = useLoaderData();
+  const param = useParams();
+  // const expenseData = useLoaderData();
+  const matches = useMatches();
+
+  /** @type {[import("@prisma/client").Expense]} */
+  const expenses = matches.find(
+    (match) => match.id === "routes/_app.expenses"
+  ).data;
+
+  const expenseData = expenses.find((expense) => expense.id === param.id);
 
   const defaultValues = expenseData
     ? { ...expenseData }
