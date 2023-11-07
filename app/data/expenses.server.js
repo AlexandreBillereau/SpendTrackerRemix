@@ -58,7 +58,8 @@ export async function getExpensesById(id) {
  */
 export async function updateExpense(id, expenseDate) {
   try {
-    prisma.expense.update({
+    console.log("UPDATE DATA");
+    return await prisma.expense.update({
       where: {
         id,
       },
