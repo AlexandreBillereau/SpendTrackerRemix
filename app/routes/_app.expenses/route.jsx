@@ -29,3 +29,8 @@ export default function Expenses() {
 export async function loader() {
   return getExpenses();
 }
+
+/**
+ * @param {import("@remix-run/node").ActionFunctionArgs}
+ */
+export async function action({ request }) {}

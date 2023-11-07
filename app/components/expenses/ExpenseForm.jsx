@@ -1,4 +1,5 @@
 import {
+  Form,
   Link,
   useActionData,
   useLoaderData,
@@ -26,7 +27,11 @@ function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
 
   return (
-    <form method="post" className="form" id="expense-form">
+    <Form
+      method={expenseData ? "patch" : "post"}
+      className="form"
+      id="expense-form"
+    >
       <p>
         <label htmlFor="title">Expense Title</label>
         <input
@@ -77,7 +82,7 @@ function ExpenseForm() {
         <button>Save Expense</button>
         <Link to={".."}>Cancel</Link>
       </div>
-    </form>
+    </Form>
   );
 }
 
