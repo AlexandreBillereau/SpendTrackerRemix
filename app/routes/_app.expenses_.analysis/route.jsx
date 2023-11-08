@@ -2,6 +2,8 @@ import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
 import Chart from "~/components/expenses/Chart";
 import { useLoaderData, useMatches } from "@remix-run/react";
 import { getExpenses } from "~/data/expenses.server";
+import { json, useRouteError } from "react-router";
+import Error from "~/components/util/Error";
 // import expensesStyle from "~/styles/expenses.css";
 // import type { LinksFunction } from "@remix-run/node";
 
@@ -41,6 +43,25 @@ export default function ExpensesAnalysisPage() {
 /**
  * @param {import("@remix-run/node").ActionFunctionArgs}
  */
-export function loader() {
-  return getExpenses();
+export async function loader() {
+  const expenses = await getExpenses();
+  if (!expenses || expenses.length === 0) {
+    throw json(
+      { message: "could not load expenses for the requested analysis" },
+      { status: 404, statusText: "expenses not found" }
+    );
+  }
+
+  return expenses;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  return (
+    <main>
+      <Error>
+        <p>{error.data.message}</p>
+      </Error>
+    </main>
+  );
 }
