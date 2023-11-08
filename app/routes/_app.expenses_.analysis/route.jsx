@@ -1,5 +1,7 @@
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
 import Chart from "~/components/expenses/Chart";
+import { useLoaderData, useMatches } from "@remix-run/react";
+import { getExpenses } from "~/data/expenses.server";
 // import expensesStyle from "~/styles/expenses.css";
 // import type { LinksFunction } from "@remix-run/node";
 
@@ -23,12 +25,22 @@ const DUMMY_EXPENSES = [
 ];
 
 export default function ExpensesAnalysisPage() {
+  /** @type {[import("@prisma/client").Expense]} */
+  const expesesDate = useLoaderData();
+
   return (
     <>
       <main>
-        <Chart expenses={DUMMY_EXPENSES}></Chart>
-        <ExpenseStatistics expenses={DUMMY_EXPENSES}></ExpenseStatistics>
+        <Chart expenses={expesesDate}></Chart>
+        <ExpenseStatistics expenses={expesesDate}></ExpenseStatistics>
       </main>
     </>
   );
+}
+
+/**
+ * @param {import("@remix-run/node").ActionFunctionArgs}
+ */
+export function loader() {
+  return getExpenses();
 }
