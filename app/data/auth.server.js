@@ -33,7 +33,9 @@ async function createUserSession(userId, redirectPath) {
  * @param {Request} request
  */
 export async function getUserFromSession(request) {
-  const session = sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
   const userId = session.get("userId");
 
   if (!userId) {
@@ -41,6 +43,21 @@ export async function getUserFromSession(request) {
   }
 
   return userId;
+}
+
+/**
+ * @param {Request} request
+ */
+export async function destroyUserSession(request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await sessionStorage.destroySession(session),
+    },
+  });
 }
 
 /**
