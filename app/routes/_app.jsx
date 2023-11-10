@@ -22,7 +22,7 @@ export async function loader({ request }) {
   const login = await getUserFromSession(request);
   if (login === null) {
     console.log(login);
-    return redirect("/");
+    throw redirect("/auth?mode=login");
   }
 
   return null;
