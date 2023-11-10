@@ -1,5 +1,8 @@
 import authStyle from "~/styles/auth.css";
 import AuthForm from "~/components/auth/AuthForm";
+import { validateCredentials } from "~/data/validation.server";
+import { signup } from "~/data/auth.server";
+import { redirect } from "@remix-run/node";
 
 export const links = () => [{ rel: "stylesheet", href: authStyle }];
 
@@ -15,13 +18,28 @@ export async function action({ request }) {
   const authMode = searchParams.get("mode") || "login";
 
   const formData = await request.formData();
-  const credentials = Object.entries(formData);
+  const credentials = Object.fromEntries(formData);
 
   //validate user input.
+  try {
+    console.log(credentials);
+    validateCredentials(credentials);
+  } catch (error) {
+    return error;
+  }
 
-  if (authMode === "login") {
-    // login
-  } else {
-    //signup
+  try {
+    if (authMode === "login") {
+      // login
+    } else {
+      //signup
+
+      await signup(credentials);
+      return redirect("/");
+    }
+  } catch (error) {
+    if (error.status === 422) {
+      return { credentials: error.message };
+    }
   }
 }
