@@ -1,9 +1,10 @@
 import { prisma } from "./database.server";
 import bcrypt from "bcryptjs";
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
+import * as dotenv from "dotenv";
 
-const SESSION_SECRET = process.env.SESSION_SECRETp;
-
+dotenv.config();
+const SESSION_SECRET = process.env.SESSION_SECRET;
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     secure: process.env.NODE_ENV === "production",
@@ -41,7 +42,10 @@ export async function signup({ email, password }) {
   }
 
   const passwordHash = await bcrypt.hash(password, 12);
-  await prisma.user.create({ data: { email: email, password: passwordHash } });
+  const user = await prisma.user.create({
+    data: { email: email, password: passwordHash },
+  });
+  return createUserSession(user.id, "/expenses");
 }
 
 /**
@@ -51,7 +55,7 @@ export async function login({ email, password }) {
   /** @type {import("@prisma/client").User} */
   const existingUser = await prisma.user.findFirst({ where: { email } });
 
-  if (existingUser) {
+  if (!existingUser) {
     const error = new Error(
       "Could not log you in, please check the provided credentials"
     );
