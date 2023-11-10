@@ -30,6 +30,20 @@ async function createUserSession(userId, redirectPath) {
 }
 
 /**
+ * @param {Request} request
+ */
+export async function getUserFromSession(request) {
+  const session = sessionStorage.getSession(request.headers.get("Cookie"));
+  const userId = session.get("userId");
+
+  if (!userId) {
+    return null;
+  }
+
+  return userId;
+}
+
+/**
  * @param {{email: String, password: String}}
  */
 export async function signup({ email, password }) {
