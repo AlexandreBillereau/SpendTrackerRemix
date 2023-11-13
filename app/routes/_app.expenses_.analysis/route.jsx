@@ -46,9 +46,9 @@ export default function ExpensesAnalysisPage() {
  */
 export async function loader({ request }) {
 
-  await requireUserSession(request);
+  const userid = await requireUserSession(request);
 
-  const expenses = await getExpenses();
+  const expenses = await getExpenses(userid);
   if (!expenses || expenses.length === 0) {
     throw json(
       { message: "could not load expenses for the requested analysis" },

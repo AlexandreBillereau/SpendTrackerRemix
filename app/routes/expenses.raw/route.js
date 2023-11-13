@@ -6,6 +6,6 @@ import { getExpenses } from "~/data/expenses.server";
  * @param {import("@remix-run/node").LoaderFunctionArgs}
  */
 export async function loader({ request }) {
-  await requireUserSession(request);
-  return getExpenses();
+  const userId = await requireUserSession(request);
+  return await getExpenses(userId);
 }

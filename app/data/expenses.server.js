@@ -3,15 +3,17 @@ import { prisma } from "./database.server";
 /**
  * create expense field in db
  * @param {import("@prisma/client").Expense} expense
+ * @param {string} userId
  * @returns
  */
-export async function addExpense(expense) {
+export async function addExpense(expense, userId) {
   try {
     return await prisma.expense.create({
       data: {
         title: expense.title,
         amount: +expense.amount,
         date: new Date(expense.date),
+        User: { connect: { id: userId } }
       },
     });
   } catch (error) {
@@ -21,12 +23,17 @@ export async function addExpense(expense) {
 }
 
 /**
+ * @param {string} userId;
  * @return {Promise<[import("@prisma/client").Expense]>}
  * return an array of expenses.
  */
-export async function getExpenses() {
+export async function getExpenses(userId) {
+  if (!userId) {
+    throw Error('failed to loade expenses');
+  }
   try {
     const expenses = await prisma.expense.findMany({
+      where: { userId },
       orderBy: { date: "desc" },
     });
     return expenses;

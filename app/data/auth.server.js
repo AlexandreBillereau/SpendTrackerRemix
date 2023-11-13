@@ -42,6 +42,7 @@ export async function getUserFromSession(request) {
     return null;
   }
 
+
   return userId;
 }
 
@@ -49,11 +50,15 @@ export async function getUserFromSession(request) {
  * @param {Request} request
  */
 export async function requireUserSession(request) {
-  const login = await getUserFromSession(request);
-  if (login === null) {
-    console.log(login);
+  const userId = await getUserFromSession(request);
+  if (userId === null) {
+    console.log(userId);
     throw redirect("/auth?mode=login");
   }
+  console.log("USER_ID:", userId);
+
+
+  return userId
 }
 
 /**
