@@ -4,6 +4,7 @@ import { useLoaderData, useMatches } from "@remix-run/react";
 import { getExpenses } from "~/data/expenses.server";
 import { json, useRouteError } from "react-router";
 import Error from "~/components/util/Error";
+import { requireUserSession } from "~/data/auth.server";
 // import expensesStyle from "~/styles/expenses.css";
 // import type { LinksFunction } from "@remix-run/node";
 
@@ -43,7 +44,10 @@ export default function ExpensesAnalysisPage() {
 /**
  * @param {import("@remix-run/node").ActionFunctionArgs}
  */
-export async function loader() {
+export async function loader({ request }) {
+
+  await requireUserSession(request);
+
   const expenses = await getExpenses();
   if (!expenses || expenses.length === 0) {
     throw json(

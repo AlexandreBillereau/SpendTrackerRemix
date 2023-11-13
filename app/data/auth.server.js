@@ -48,6 +48,17 @@ export async function getUserFromSession(request) {
 /**
  * @param {Request} request
  */
+export async function requireUserSession(request) {
+  const login = await getUserFromSession(request);
+  if (login === null) {
+    console.log(login);
+    throw redirect("/auth?mode=login");
+  }
+}
+
+/**
+ * @param {Request} request
+ */
 export async function destroyUserSession(request) {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie")
