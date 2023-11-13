@@ -1,10 +1,34 @@
 # Welcome to Remix expense tracker!
 
+![image of website](SpendTrackImg.png)
+
 - its a demo project to learn remix.js
 
-## Development
+## install and work on this project
 
-From your terminal:
+### #1 fork the project
+
+### #2 install dependecies
+
+in your terminal :
+
+```sh
+
+npm i;
+npx prisma generate;
+
+```
+
+### #3 add your .env file
+
+```js
+DATABASE_URL="mongodb+srv://<user_name>:<password>@<dbName>.tlwgxcb.mongodb.net/remix-expenses?retryWrites=true&w=majority"
+SESSION_SECRET="session_secret"
+```
+
+### #4 launch the app in dev
+
+in your terminal : 
 
 ```sh
 npm run dev
@@ -14,25 +38,5 @@ This starts your app in development mode, rebuilding assets on file changes.
 
 ## Deployment
 
-First, build your app for production:
+the website is deployed on this link : https://spend-tracker-remix.vercel.app/
 
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`

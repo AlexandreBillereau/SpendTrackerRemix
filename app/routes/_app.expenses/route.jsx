@@ -18,7 +18,7 @@ export default function Expenses() {
           </Link>
           <a href="expenses/raw">
             <FaDownload />
-            <span>Add Expense</span>
+            <span>Expense Raw</span>
           </a>
         </section>
         <ExpensesList expenses={expenses}></ExpensesList>
