@@ -39,4 +39,6 @@ export default function PricingPage() {
   );
 }
 
-export function meta() {}
+export function meta() {
+  return [{ title: "Pricing", despcription: "See our plan despcription" }]
+}

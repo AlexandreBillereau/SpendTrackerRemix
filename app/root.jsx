@@ -14,11 +14,10 @@ import Error from "./components/util/Error";
 
 export const links = () => [{ rel: "stylesheet", href: sharedStyles }];
 
-function Document({ title, children }) {
+function Document({ error, children }) {
   return (
     <html lang="en">
       <head>
-        <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
@@ -53,9 +52,9 @@ export function ErrorBoundary() {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <Document title={error.statusText}>
+      <Document error={error.statusText}>
         <main>
-          <Error title={error.statusText}>
+          <Error error={error.statusText}>
             <p>
               {error.data?.message ||
                 "Something went wrong, please try again later!"}

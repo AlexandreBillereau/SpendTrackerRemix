@@ -20,3 +20,8 @@ export default function MarketingAppLayout() {
 export function loader({ request }) {
   return getUserFromSession(request);
 }
+
+
+export function meta() {
+  return [{ title: "Expense app | Remix" }]
+}

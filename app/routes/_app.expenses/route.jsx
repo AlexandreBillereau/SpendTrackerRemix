@@ -41,3 +41,12 @@ export async function loader({ request }) {
  * @param {import("@remix-run/node").ActionFunctionArgs}
  */
 export async function action({ request }) { }
+
+
+/**
+ * @return {import("@remix-run/node").MetaFunction}
+ */
+export function meta() {
+
+  return [{ title: "expenses app | Remix" }];
+}

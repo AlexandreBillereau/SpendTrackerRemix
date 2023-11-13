@@ -69,3 +69,11 @@ export function ErrorBoundary() {
     </main>
   );
 }
+
+/**
+ * @return {import("@remix-run/node").MetaFunction}
+ */
+export function meta() {
+
+  return [{ title: "expenses analysis | Remix" }];
+}
