@@ -1,6 +1,6 @@
-# Welcome to Remix!
+# Welcome to Remix expense tracker!
 
-- [Remix Docs](https://remix.run/docs)
+- its a demo project to learn remix.js
 
 ## Development
 
